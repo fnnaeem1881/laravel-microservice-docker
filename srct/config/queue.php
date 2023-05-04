@@ -72,12 +72,18 @@ return [
         ],
         'rabbitmq' => [
             'driver' => 'rabbitmq',
+            'dsn' => env('RABBITMQ_DSN'),
             'host' => env('RABBITMQ_HOST', 'localhost'),
-            'port' => env('RABBITMQ_PORT', 5672),
-            'vhost' => env('RABBITMQ_VHOST', '/'),
+            'port' => env('RABBITMQ_PORT', 15672),
             'login' => env('RABBITMQ_LOGIN', 'guest'),
             'password' => env('RABBITMQ_PASSWORD', 'guest'),
-        ],
+            'vhost' => env('RABBITMQ_VHOST', '/'),
+            'options' => [
+                'ssl_options' => [
+                    'verify_peer' => false,
+                ],
+            ],
+        ]
 
     ],
 
