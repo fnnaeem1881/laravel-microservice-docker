@@ -1,5 +1,7 @@
 <?php
 
+use App\Jobs\SendMessageJob;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +23,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/send-message', function () {
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello, world!');
+
+    return response()->json(['status' => 'success']);
+});
 require __DIR__.'/auth.php';

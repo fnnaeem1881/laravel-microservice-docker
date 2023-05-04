@@ -40,7 +40,16 @@ services:
       - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - app-network
-
+ # RabbitMQ Service
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - app-network
   #Nginx Service
   webserver:
     image: nginx:alpine
