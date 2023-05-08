@@ -64,23 +64,18 @@ Route::get('/check-connect', function () {
 });
 Route::get('/received', function () {
 
-    // require_once __DIR__ . '/vendor/autoload.php'; // Replace with the path to your autoload file
-
-
-    // Replace these values with your own
     // $host = 'goose-01.rmq2.cloudamqp.com';
     // $port = 5672;
     // $user = 'xrljngis';
     // $password = '4tdn42J7Dpq4oXL9QH-IIrU4WkyPfSuE';
     // $vhost = 'xrljngis';
-
     $host = 'rabbitmq'; // replace with your container name
     $port = 5672;
     $user = 'guest';
     $password = 'guest';
     $vhost = '/';
     $exchange = 'my_exchange'; // replace with your own exchange name
-    $queue = 'my_queue'; // replace with your own queue name
+    $queue = 'default'; // replace with your own queue name
 
     // create a connection to RabbitMQ
     $connection = new AMQPStreamConnection($host, $port, $user, $password, $vhost);
@@ -98,19 +93,21 @@ Route::get('/received', function () {
     $channel->queue_bind($queue, $exchange);
 
     // create a callback function to handle incoming messages
-    $callback = function (AMQPMessage $message) {
+    $callback = function (AMQPMessage $message) use ($channel) {
         echo $message->body . "\n";
+
+        // Close the channel after receiving one message
+        $channel->close();
     };
 
     // consume messages from the queue
     $channel->basic_consume($queue, '', false, true, false, false, $callback);
 
     // wait for incoming messages
-    while (count($channel->callbacks)) {
+    while ($channel->is_consuming()) {
         $channel->wait();
     }
 
-    // close the channel and the connection
-    $channel->close();
+    // close the connection
     $connection->close();
 });

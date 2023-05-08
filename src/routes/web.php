@@ -26,17 +26,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/send-message', function () {
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
+    SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello,world!');
+    // SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello world!');
+    // SendMessageJob::dispatch('Hello world!');
+
+    // return response()->json(['status' => 'success']);
+
 
     return response()->json(['status' => 'success']);
 });
@@ -82,7 +85,7 @@ Route::get('/send/{p}', function ($p) {
     $password = 'guest';
     $vhost = '/';
     $exchange = 'my_exchange'; // replace with your own exchange name
-    $queue = 'my_queue'; // replace with your own queue name
+    $queue = 'default'; // replace with your own queue name
     $messageBody = $p; // replace with your own message body
 
     // create a connection to RabbitMQ
@@ -109,6 +112,7 @@ Route::get('/send/{p}', function ($p) {
     // close the channel and the connection
     $channel->close();
     $connection->close();
+    return response()->json(['status' => 'success']);
 
     });
 require __DIR__ . '/auth.php';
