@@ -40,7 +40,7 @@ services:
       - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - app-network
- # RabbitMQ Service
+  # RabbitMQ Service
   rabbitmq:
     image: rabbitmq:3.8-management-alpine
     container_name: rabbitmq
@@ -82,8 +82,7 @@ services:
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     networks:
       - app-network
-
-  #phpMyAdmin Service
+    # phpMyAdmin Service for the first database
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -97,6 +96,37 @@ services:
     networks:
       - app-network
 
+  # Second MySQL Service
+  db2:
+    image: mysql:5.7.32
+    container_name: db2
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3307:3306" # Use a different port than the first MySQL service
+    environment:
+      MYSQL_DATABASE: garibook2 # Set the name for the second database
+      MYSQL_ROOT_PASSWORD: garibook
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql2
+    volumes:
+      - dbdata2:/var/lib/mysql/ # Use a different volume for the second database
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - app-network
+  # phpMyAdmin Service for the second database
+  phpmyadmin2:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin2
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db2
+      MYSQL_ROOT_PASSWORD: garibook
+      UPLOAD_LIMIT: 100M
+    ports:
+      - '8181:80'
+    networks:
+      - app-network
 #Docker Networks
 networks:
   app-network:
@@ -105,4 +135,6 @@ networks:
 #Volumes
 volumes:
   dbdata:
+    driver: local
+  dbdata2:
     driver: local
