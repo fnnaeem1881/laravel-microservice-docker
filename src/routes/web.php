@@ -27,16 +27,16 @@ Route::get('/dashboard', function () {
 
 Route::get('/send-message', function () {
     SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello,world!');
-    // SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello world!');
-    // SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello,world!');
+    SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello world!');
+    SendMessageJob::dispatch('Hello world!');
 
     // return response()->json(['status' => 'success']);
 
