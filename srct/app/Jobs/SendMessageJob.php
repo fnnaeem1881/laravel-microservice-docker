@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Jobs;
+
+use App\Http\Controllers\QueueInsert;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -27,7 +29,8 @@ class SendMessageJob implements ShouldQueue
 
     public function handle()
     {
-        echo $this->message . PHP_EOL;
+        $SendBkashController =(new QueueInsert)->store($this->message);
+        echo $SendBkashController;
 
     }
 }

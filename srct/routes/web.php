@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QueueInsert;
 use App\Jobs\SendMessageJob;
 use Illuminate\Support\Facades\Route;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -26,17 +27,17 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 Route::get('/send-message', function () {
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
-    SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
+    // SendMessageJob::dispatch('Hello, world!');
 
     return response()->json(['status' => 'success']);
 });
@@ -115,3 +116,4 @@ Route::get('/received', function () {
     // close the connection
     $connection->close();
 });
+Route::get('/store', [QueueInsert::class, 'store']);
