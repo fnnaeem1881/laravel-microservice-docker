@@ -68,7 +68,6 @@ Route::get('/check-connect', function () {
     }
 });
 Route::get('/received', function () {
-dd('dasd');
     // $host = 'goose-01.rmq2.cloudamqp.com';
     // $port = 5672;
     // $user = 'xrljngis';
@@ -102,7 +101,7 @@ dd('dasd');
         echo $message->body . "\n";
 
         // Close the channel after receiving one message
-        $channel->close();
+        // $channel->close();
     };
 
     // consume messages from the queue

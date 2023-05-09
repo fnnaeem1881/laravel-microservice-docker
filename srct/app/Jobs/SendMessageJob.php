@@ -11,34 +11,23 @@ class SendMessageJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $signature = 'receive:message';
+
+    protected $message;
 
     /**
-     * The console command description.
+     * Create a new job instance.
      *
-     * @var string
+     * @param string $message
+     * @return void
      */
-    protected $description = 'Receive messages from RabbitMQ';
+    public function __construct($message)
+    {
+        $this->message = $message;
+    }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
-        $connection = app('rabbitmq')->connection();
-        $channel = $connection->channel();
-        $channel->queue_declare('test_queue', false, true, false, false);
-        echo " [*] Waiting for messages. To exit press CTRL+C\n";
-        $callback = function ($msg) {
-            echo ' [x] Received ', $msg->body, "\n";
-        };
-        $channel->basic_consume('test_queue', '', false, true, false, false, $callback);
-        while ($channel->is_consuming()) {
-            $channel->wait();
-        }
-        $channel->close();
-        $connection->close();
+        echo $this->message . PHP_EOL;
+
     }
 }
