@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class queue_insert extends Model
 {
-    use HasFactory;
+    protected $guarded=[];
+    protected $fillable = [
+        'data',
+    ];
 }

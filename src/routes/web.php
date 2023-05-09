@@ -26,18 +26,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/send-message', function () {
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello,world!');
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello world!');
-    SendMessageJob::dispatch('Hello world!');
+    for ($x = 0; $x <= 20000; $x++) {
+        SendMessageJob::dispatch($x.' data');
 
+      }
     // return response()->json(['status' => 'success']);
 
 
