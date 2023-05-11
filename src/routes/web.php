@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/send-message', function () {
-    for ($x = 0; $x <= 20000; $x++) {
+    for ($x = 1; $x <= 20000; $x++) {
         SendMessageJob::dispatch($x.' data');
 
       }
