@@ -15,8 +15,13 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         $jwtToken = session('jwt_token');
-        if(!isset($jwtToken)){
-            return route('login');
+
+        if ($jwtToken) {
+            // User is already logged in, redirect to the dashboard or any other page
+            // return redirect('/dashboard');
+        } else {
+            // User is logged out, show the login form
+            return view('auth.login');
         }
 
     }

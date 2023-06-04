@@ -19,10 +19,7 @@
                 @if(session('access_token'))
                 <!-- Show logout menu item if the user is logged in -->
                 <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="nav-link btn btn-link" type="submit">Logout</button>
-                    </form>
+                   <a href="{{route('logout.custom')}}">Logout</a>
                 </li>
                 @endif
             </ul>

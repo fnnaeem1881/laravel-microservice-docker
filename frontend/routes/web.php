@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,8 @@ require __DIR__ . '/auth.php';
 //         // ...
 //     }
 // })->name('custom.login');
+
+
 Route::get('/dashboard', function (Request $request) {
     $jwtToken = session('jwt_token');
     $client = new Client();
@@ -85,4 +88,13 @@ Route::get('/dashboard', function (Request $request) {
         dd($e);
     }
 
-})->name('dashboard');;
+})->name('dashboard');
+
+Route::get('/logout/custom',function(){
+    Session::forget('access_token');
+    Session::forget('jwt_token');
+    Session::remove('access_token');
+    Session::remove('jwt_token');
+
+    return redirect('/login');
+})->name('logout.custom');
