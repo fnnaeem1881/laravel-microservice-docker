@@ -19,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
@@ -62,7 +62,7 @@ require __DIR__ . '/auth.php';
 //         // ...
 //     }
 // })->name('custom.login');
-Route::get('/test/login', function (Request $request) {
+Route::get('/dashboard', function (Request $request) {
     $jwtToken = session('jwt_token');
     $client = new Client();
 
@@ -73,11 +73,16 @@ Route::get('/test/login', function (Request $request) {
             ]
         ]);
         $GetInfo = json_decode($responseee->getBody()->getContents(), true);
-        dd($GetInfo);
+        return view('dashboard', [
+            'userId' => $GetInfo['id'],
+            'email' => $GetInfo['email'],
+            'name' => $GetInfo['name'],
+
+        ]);
         // Handle the response from the protected endpoint
         // ...
     } catch (Exception $e) {
         dd($e);
     }
 
-});
+})->name('dashboard');;
