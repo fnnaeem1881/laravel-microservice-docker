@@ -22,9 +22,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        $jwtToken = session('jwt_token');
+        $access_token = session('access_token');
 
-        if ($jwtToken) {
+        if ($access_token) {
             // User is already logged in, redirect to the dashboard or any other page
             return redirect('/dashboard');
         } else {
@@ -69,10 +69,10 @@ class AuthenticatedSessionController extends Controller
                 $responseData = json_decode($responseBody, true);
 
                 $accessToken = $responseData['access_token'];
-                session(['jwt_token' => $accessToken]);
+                $expiresIn = $responseData['expires_in'];
+                $expirationTime = time() + $expiresIn;
 
-                session(['access_token' => $accessToken]);
-
+                session(['access_token' => $accessToken,'expiration_time' => $expirationTime]);
                 try {
                     $responseee = $client->get('http://app:9000/api/auth/protected-endpoint', [
                         'headers' => [

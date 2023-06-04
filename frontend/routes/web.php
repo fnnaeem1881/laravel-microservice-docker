@@ -63,13 +63,13 @@ require __DIR__ . '/auth.php';
 
 
 Route::get('/dashboard', function (Request $request) {
-    $jwtToken = session('jwt_token');
+    $access_token = session('access_token');
     $client = new Client();
 
     try {
         $responseee = $client->get('http://app:9000/api/auth/protected-endpoint', [
             'headers' => [
-                'Authorization' => 'Bearer ' . $jwtToken
+                'Authorization' => 'Bearer ' . $access_token
             ]
         ]);
         $GetInfo = json_decode($responseee->getBody()->getContents(), true);
@@ -89,9 +89,7 @@ Route::get('/dashboard', function (Request $request) {
 
 Route::get('/logout/custom',function(){
     Session::forget('access_token');
-    Session::forget('jwt_token');
     Session::remove('access_token');
-    Session::remove('jwt_token');
 
     return redirect('/login');
 })->name('logout.custom');
