@@ -20,9 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
@@ -88,7 +85,7 @@ Route::get('/dashboard', function (Request $request) {
         dd($e);
     }
 
-})->name('dashboard');
+})->middleware('checklogin')->name('dashboard');
 
 Route::get('/logout/custom',function(){
     Session::forget('access_token');
