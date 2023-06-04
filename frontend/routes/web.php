@@ -1,0 +1,83 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use GuzzleHttp\Client;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
+
+// Route::post('/custom/login', function (Request $request) {
+
+//     // ...
+
+//     $request->validate([
+//         'email' => 'required|email',
+//         'password' => 'required',
+//     ]);
+
+//     $email = $request->email;
+//     $password = $request->password;
+
+//     // Create a new Guzzle client
+//     $client = new Client();
+
+//     // Specify the URL of the destination microservice
+//     $destinationUrl = 'http://app:9000/api/auth/login';
+
+//     try {
+//         // Send a POST request to the destination microservice with the email and password in the request body
+//         $response = $client->post($destinationUrl, [
+//             'form_params' => [
+//                 'email' => $email,
+//                 'password' => $password
+//             ]
+//         ]);
+//         // Get the response body as a string
+//         $responseBody = $response->getBody()->getContents();
+//         dd($responseBody);
+//         // Process the response from the destination microservice
+//         // ...
+//     } catch (Exception $e) {
+//         dd($e);
+//         // Handle any errors that occurred during the API call
+//         // ...
+//     }
+// })->name('custom.login');
+Route::get('/test/login', function (Request $request) {
+    $jwtToken = session('jwt_token');
+    $client = new Client();
+
+    try {
+        $responseee = $client->get('http://app:9000/api/auth/protected-endpoint', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $jwtToken
+            ]
+        ]);
+        $GetInfo = json_decode($responseee->getBody()->getContents(), true);
+        dd($GetInfo);
+        // Handle the response from the protected endpoint
+        // ...
+    } catch (Exception $e) {
+        dd($e);
+    }
+
+});

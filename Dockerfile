@@ -38,16 +38,20 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy both Laravel projects to container
 COPY src /var/www/html/src
 COPY srct /var/www/html/srct
+COPY frontend /var/www/html/frontend
+
 
 # Install dependencies for Laravel projects
 WORKDIR /var/www/html/src
 RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs
 WORKDIR /var/www/html/srct
 RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs
-
+WORKDIR /var/www/html/frontend
+RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs
 # Expose ports
 EXPOSE 9000
 EXPOSE 9001
+EXPOSE 8000
 
 # Start Laravel projects
-CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=9000 & php /var/www/html/srct/artisan serve --host=0.0.0.0 --port=9001"]
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=9000 & php /var/www/html/srct/artisan serve --host=0.0.0.0 --port=9001 & php /var/www/html/frontend/artisan serve --host=0.0.0.0 --port=8000"]

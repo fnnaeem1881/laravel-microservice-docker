@@ -15,9 +15,9 @@ services:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
     working_dir: /var/www/html/src
-    volumes:
-      - ./src:/var/www/html/src
-      - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
+    # volumes:
+    #   - ./src:/var/www/html/src
+    #   - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - app-network
 
@@ -35,9 +35,28 @@ services:
       SERVICE_NAME: app2
       SERVICE_TAGS: dev
     working_dir: /var/www/html/srct
-    volumes:
-      - ./srct:/var/www/html/srct
-      - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
+    # volumes:
+    #   - ./srct:/var/www/html/srct
+    #   - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
+    networks:
+      - app-network
+        #PHP Service for second Laravel project
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    container_name: frontend
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: frontend
+      SERVICE_TAGS: dev
+    working_dir: /var/www/html/frontend
+    # volumes:
+    #   - ./srct:/var/www/html/srct
+    #   - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - app-network
   # RabbitMQ Service
