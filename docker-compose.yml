@@ -34,9 +34,9 @@ services:
     environment:
       SERVICE_NAME: app2
       SERVICE_TAGS: dev
-    working_dir: /var/www/html/srct
+    working_dir: /var/www/html/booking
     # volumes:
-    #   - ./srct:/var/www/html/srct
+    #   - ./booking:/var/www/html/booking
     #   - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - app-network
@@ -55,7 +55,7 @@ services:
       SERVICE_TAGS: dev
     working_dir: /var/www/html/frontend
     # volumes:
-    #   - ./srct:/var/www/html/srct
+    #   - ./booking:/var/www/html/booking
     #   - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - app-network
