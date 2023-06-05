@@ -36,25 +36,34 @@
                                 <h2>Make your trip</h2>
                                 <div class="form-group">
                                     <label for="" class="label">Pick-up location</label>
-                                    <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                                    <input type="text" name="pcik_up_location" class="form-control" placeholder="City, Airport, Station, etc">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Drop-off location</label>
-                                    <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                                    <input type="text" name="drop_off_location" class="form-control" placeholder="City, Airport, Station, etc">
                                 </div>
                                 <div class="d-flex">
                                     <div class="form-group mr-2">
                                         <label for="" class="label">Pick-up date</label>
-                                        <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+                                        <input type="text" name="pcik_up_date" class="form-control" id="book_pick_date" placeholder="Date">
                                     </div>
                                     <div class="form-group ml-2">
                                         <label for="" class="label">Drop-off date</label>
-                                        <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+                                        <input type="text" name="drop_off_date" class="form-control" id="book_off_date" placeholder="Date">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Pick-up time</label>
-                                    <input type="text" class="form-control" id="time_pick" placeholder="Time">
+                                    <input type="text" name="pcik_up_time" class="form-control" id="time_pick" placeholder="Time">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Select Car</label>
+                                    <select class="form-select form-control" style="color:black" aria-label="Select Car">
+                                        <option style="background: #1089ff " selected>Select Car</option>
+                                        <option style="background: #1089ff " value="sedan">Sedan</option>
+                                        <option style="background: #1089ff " value="noah">Noah</option>
+                                        <option style="background: #1089ff " value="hiace">Hiace</option>
+                                      </select>
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
