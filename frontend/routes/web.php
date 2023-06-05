@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 
 require __DIR__ . '/auth.php';
@@ -93,3 +94,6 @@ Route::get('/logout/custom',function(){
 
     return redirect('/login');
 })->name('logout.custom');
+View::composer('layouts.navigation',function ($view) {
+
+});
