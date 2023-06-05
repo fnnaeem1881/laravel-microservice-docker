@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Jobs\booking;
 use App\Jobs\SendMessageJob;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -30,6 +31,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         App::bindMethod(SendMessageJob::class . '@handle', fn($job) => $job->handle());
-
+        App::bindMethod(booking::class . '@handle', fn($job) => $job->handle());
     }
 }

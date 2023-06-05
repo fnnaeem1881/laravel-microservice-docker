@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontendBookingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
@@ -85,15 +86,15 @@ Route::get('/dashboard', function (Request $request) {
     } catch (Exception $e) {
         dd($e);
     }
-
 })->middleware('checklogin')->name('dashboard');
 
-Route::get('/logout/custom',function(){
+Route::get('/logout/custom', function () {
     Session::forget('access_token');
     Session::remove('access_token');
 
     return redirect('/login');
 })->name('logout.custom');
-View::composer('layouts.navigation',function ($view) {
-
+View::composer('layouts.navigation', function ($view) {
 });
+
+Route::post('booking/store',[FrontendBookingController::class, 'storeBooking'])->name('booking.store');
