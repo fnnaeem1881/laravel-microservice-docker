@@ -97,4 +97,4 @@ Route::get('/logout/custom', function () {
 View::composer('layouts.navigation', function ($view) {
 });
 
-Route::post('booking/store',[FrontendBookingController::class, 'storeBooking'])->name('booking.store');
+Route::post('booking/store',[FrontendBookingController::class, 'storeBooking'])->middleware('checklogin')->name('booking.store');
