@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\AuthenticationJob;
 use App\Jobs\SendMessageJob;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,8 +27,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/send-message', function () {
-    for ($x = 1; $x <= 20000; $x++) {
-        SendMessageJob::dispatch($x.' data');
+    for ($x = 0; $x <= 200; $x++) {
+        AuthenticationJob::dispatch($x.' data');
 
       }
     // return response()->json(['status' => 'success']);

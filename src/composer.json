@@ -8,12 +8,13 @@
         "php": "^7.3|^8.0",
         "enqueue/amqp-lib": "^0.10.18",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.6",
         "laravel/breeze": "1.9.2",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "php-amqplib/php-amqplib": "^3.5",
+        "tymon/jwt-auth": "^1.0@dev",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.3"
     },
     "require-dev": {
