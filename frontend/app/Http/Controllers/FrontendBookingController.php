@@ -28,7 +28,7 @@ class FrontendBookingController extends Controller
             ];
             // dd($data);
             booking::dispatch(json_encode($data));
-            return redirect()->back()->with('success','Booking Success');
+            return redirect()->back()->with('success','Booking Successfully');
         }else{
             return redirect()->back()->with('error','Booking failed');
         }

@@ -28,12 +28,13 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/flaticon.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/icomoon.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
-    <!-- Scripts -->
-         <!-- Styles -->
-         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-         <!-- Scripts -->
-         <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Scripts -->
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     @yield('css')
 </head>
 
@@ -56,6 +57,9 @@
 
 
     <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('assets') }}/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="{{ asset('assets') }}/js/popper.min.js"></script>
     <script src="{{ asset('assets') }}/js/bootstrap.min.js"></script>
@@ -72,6 +76,39 @@
     <script src="{{ asset('assets') }}/js/google-map.js"></script>
     <script src="{{ asset('assets') }}/js/main.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script type="text/javascript">
+        @if (Session::has('success'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.info("{{ session('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
     @yield('script')
 
 </body>

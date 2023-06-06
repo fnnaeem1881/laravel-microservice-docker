@@ -80,7 +80,7 @@ class AuthenticatedSessionController extends Controller
                         ]
                     ]);
                     $GetInfo = json_decode($responseee->getBody()->getContents(), true);
-                    return redirect('/dashboard');
+                    return redirect()->route('home')->with('success','Login Successfully');
 
                     // Handle the response from the protected endpoint
                     // ...
@@ -90,10 +90,10 @@ class AuthenticatedSessionController extends Controller
 
                 // ...
             } catch (Exception $e) {
-                throw ValidationException::withMessages([
-                    'email' => trans('auth.failed'),
-                ]);
-                // return redirect('/login')->with('error', 'Invalid credentials');
+                // throw ValidationException::withMessages([
+                //     'email' => trans('auth.failed'),
+                // ]);
+                return redirect('/login')->with('error', 'Invalid credentials');
             }
         } catch (Exception $e) {
             // Handle any errors that occurred during the API call

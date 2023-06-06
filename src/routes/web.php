@@ -28,7 +28,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/send-message', function () {
     for ($x = 0; $x <= 200; $x++) {
-        AuthenticationJob::dispatch($x.' data');
+        SendMessageJob::dispatch($x.' data');
 
       }
     // return response()->json(['status' => 'success']);
